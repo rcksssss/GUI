@@ -1,9 +1,7 @@
 /*
-
 File: style.css
 Thomas Boyajian
 Styling for the Website
-
 */
 
 h1 {
@@ -16,11 +14,9 @@ ul li img {
 }
 
 body {
-
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-
   background-image: url("../images/background.jpg");
   background-repeat: no-repeat; /* Prevents image from repeating */
   background-position: center; /* Centers the image */
@@ -31,7 +27,6 @@ body {
 }
 
 th, td {
-
   border: 1px solid #ddd;   /* adds column bars */
   padding: 10px;
   text-align: center;
@@ -39,7 +34,6 @@ th, td {
 }
 
 th {
-
   background-color: #444;
   color: white;
 }
@@ -51,7 +45,6 @@ table {
 }
 
 tr {
-
   font-weight: bold;
 }
 
@@ -69,9 +62,7 @@ ul {
 }
 
 li {
-
   margin: 8px 0; /* adds spacing between list items */
-
 }
 
 li img {
@@ -89,6 +80,5 @@ li a:hover {
 }
 
 td {
-
   font-size: x-large;
 }
