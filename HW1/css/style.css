@@ -1,0 +1,94 @@
+/*
+
+File: style.css
+Thomas Boyajian
+Styling for the Website
+
+*/
+
+h1 {
+    text-align: center;
+}
+
+ul li img {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+body {
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat; /* Prevents image from repeating */
+  background-position: center; /* Centers the image */
+  background-size: cover; /* Scales the image to cover the entire element */
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  background-blend-mode: darken;
+  color: #fff;
+}
+
+th, td {
+
+  border: 1px solid #ddd;   /* adds column bars */
+  padding: 10px;
+  text-align: center;
+
+}
+
+th {
+
+  background-color: #444;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+}
+
+tr {
+
+  font-weight: bold;
+}
+
+h2 {
+  font-size: xx-large;
+  text-align: center;
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: none; /* removes the default bullets */
+  padding: 0;
+  text-align: center;
+  font-size: x-large;
+}
+
+li {
+
+  margin: 8px 0; /* adds spacing between list items */
+
+}
+
+li img {
+  vertical-align: middle;  /* keeps the icon aligned with text */
+  margin-right: 6px;
+}
+
+li a {
+  font-weight: bold;       /* makes Pokémon names stand out */
+  text-decoration: none;   /* removes underline */
+}
+
+li a:hover {
+  text-decoration: underline; /* underline on hover */
+}
+
+td {
+
+  font-size: x-large;
+}
