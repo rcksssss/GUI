@@ -1,11 +1,30 @@
 header, hgroup, nav, footer, figure, figcaption, aside, section, article {
 	display: block;
 }
+
 body {
-	background: url("ptrbackground.jpg") repeat-x top left, #00569f;
-	background-color: ;
-	color: #666666;
-	font-family: Arial, Helvetica, sans-serif;
+  margin: 0; /* JPG only as a top strip + solid blue for the rest */
+  background: url("ptrbackground.jpg");
+  color: #666666;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  background-color: #00569f; /*Background has full solid color after gradient*/
+}
+
+#wrapper {
+	width: 80%; /*Takes up 80% of the page*/
+	min-width: 600px; /*But makes sure there is a 600px min*/
+	margin: 0 auto;
+	background: #FFFFFF;
+	padding: 16px 18px 24px; 
+	max-width: 1200px;
+	box-shadow: 0 8px 16px rgba(0,0,0,0.06); /*Added a bit of shadow*/
+}
+
+nav {
+	width: 220px;
+	float: left;
+	margin-right: 18px; 
 }
 
 nav ul {
