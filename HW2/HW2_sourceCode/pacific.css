@@ -42,21 +42,25 @@ header{
 
 #content {
 	overflow: hidden;
+  max-width: 800px;
+  margin-left: 244px;
+  padding: 0 18px;
 }
 
 /* Use marker.gif for bullets */
-#content ul{
-  list-style:none;            /* remove default bullets */
-  margin:0 0 12px 0;
-  padding-left:18px;          /* room for our custom marker */
+/* marker.gif bullets with proper indent */
+#content ul {
+  list-style-image: url("marker.gif");
+  list-style-position: outside;  /* bullet outside, text lines up neatly */
+  margin: 0 0 12px 36px;         /* increase left margin for indent */
+  padding-left: 40px;
 }
 
-#content li{
-  background: url("marker.gif") no-repeat 0 0.5em; /*marker.gif as bullets */
-  padding-left:18px;
-  margin:6px 0;
-  line-height: 1.6;
+#content li {
+  margin: 6px 0;
+  line-height: 1.5;
 }
+
 
 #content img {
   max-width: 100%;
