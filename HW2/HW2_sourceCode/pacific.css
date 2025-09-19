@@ -11,53 +11,141 @@ body {
   background-color: #00569f; /*Background has full solid color after gradient*/
 }
 
-#wrapper {
-	width: 80%; /*Takes up 80% of the page*/
-	min-width: 600px; /*But makes sure there is a 600px min*/
-	margin: 0 auto;
-	background: #FFFFFF;
-	padding: 16px 18px 24px; 
-	max-width: 1200px;
-	box-shadow: 0 8px 16px rgba(0,0,0,0.06); /*Added a bit of shadow*/
+/* Header with sunset.jpd behind it */
+header{
+	margin: 0 -18px 0 -18px; /* makes it extend beyond the wrapper padding */
+  	background-color:#000033; /* dark navy strip */
+  	background-image: url("sunset.jpg");
+  	background-repeat: no-repeat;
+  	background-position: right center; /* banner image stuck to the right; do not stretch */
+  	height:60px;
+  	padding: 0px 12px 18px; /* space for the title */
+  	color:#fff;
+  	font-size: 1.3em;
+}
+
+/* Page shell */
+#wrapper{
+  position: relative;
+  width: 80%;
+  min-width: 600px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px 24px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.06);
+  background-color: #FFFFFF;
+  
+  /* faux column: paint a solid light-blue strip on the left */
+  background-image: linear-gradient(to right, #90C7E3 0, #90C7E3 244px, #FFFFFF 244px);
+  background-repeat: repeat-y;
 }
 
 #content {
-	
+	overflow: hidden;
 }
-nav {
-	width: 220px;
-	float: left;
-	margin-right: 18px; 
+
+/* Use marker.gif for bullets */
+#content ul{
+  list-style:none;            /* remove default bullets */
+  margin:0 0 12px 0;
+  padding-left:18px;          /* room for our custom marker */
+}
+
+#content li{
+  background: url("marker.gif") no-repeat 0 0.5em; /*marker.gif as bullets */
+  padding-left:18px;
+  margin:6px 0;
+  line-height: 1.6;
+}
+
+#content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 6px 0 12px;
+  float: left;
+  padding-right: 18px; /* needed to push the text more to the right */
+}
+
+nav li {margin: 0 0 8px;}
+
+nav{
+  float:left;
+  width:220px;
+  margin:12px 18px 0 0;
+  padding:10px 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  line-height: 0.8; /* needed so it wasn't so spaced out */
+}
+
+nav a{
+  display:block;
+  padding:0;
+  text-decoration:none;
+  color:#000033;
+  background:none;
+  border-radius:0;
 }
 
 nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 	font-size: 1.2em;
 }
+
+.resort {
+	color: #3399CC;
+	font-weight: bold;
+}
+
 nav a:visited {
 	color: #344873;
 }
+
 nav a:hover {
+	background: #3399CC;
 	color: #FFFFFF;
 }
+
 h1 {
 	margin-bottom: 0;
 	padding: 10px;
 }
+
 h2 {
 	color: #3399CC;
 }
-h1,
-h2 {
-	font-family: Georgia, "Times New Roman", serif;
-}
-#contact {
-	font-size: 90%;
-}
-dt {
-	color: #000033;
-}
-footer {
+
+h1, h2 {
 	font-family: Georgia, "Times New Roman", serif;
 }
 
+#contact {
+	font-size: 90%;
+}
+
+dt {
+	color: #000033;
+}
+
+footer {
+	clear: both;
+  	margin-top: 24px;
+  	padding: 12px 0 0 244px;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 0.75em;
+	font-style: italic;
+}
+
+footer a { color: #3399CC; }
+footer a:hover { color: #0e7ab4; text-decoration: underline; }
+
+/* Needed for smaller screens */
+@media (max-width:800px){
+  #wrapper{ width:92%; min-width:0; }
+  nav{ float:none; width:auto; margin:12px 0 0; }
+  #content{ overflow:visible; }
+}
 
