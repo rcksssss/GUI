@@ -112,6 +112,7 @@ nav a:visited {
 nav a:hover {
 	background: #3399CC;
 	color: #FFFFFF;
+  width: 150px; /* Added and fixed for hover width on left side column */
 }
 
 h1 {
