@@ -47,6 +47,11 @@ header{
   padding: 0 18px;
 }
 
+#content h2 {
+  font-size: 1.9em;
+  font-weight: bold; /* Added bold to h2 for better visibility */
+}
+
 /* Use marker.gif for bullets */
 /* marker.gif bullets with proper indent */
 #content ul {
@@ -57,8 +62,8 @@ header{
 
 #content li {
   margin: 6px 0;
-  line-height: 1.5;
-  
+  line-height: 1.2;  
+  font-size: 1.1em; /* increased font size for readability */
 }
 
 
