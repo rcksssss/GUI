@@ -102,7 +102,7 @@ nav ul {
 	margin: 0;
 	padding: 0;
 	font-size: 1.2em;
-  line-height: 1; /* Added spacing vertically between words */
+  line-height: .8; /* Added spacing vertically between words */
 }
 
 .resort {
