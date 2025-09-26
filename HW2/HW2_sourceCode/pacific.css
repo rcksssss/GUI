@@ -53,12 +53,12 @@ header{
   list-style-image: url("marker.gif");
   list-style-position: outside;  /* bullet outside, text lines up neatly */
   margin: 0 0 12px 36px;         /* increase left margin for indent */
-  padding-left: 40px;
 }
 
 #content li {
   margin: 6px 0;
   line-height: 1.5;
+  
 }
 
 
@@ -68,7 +68,7 @@ header{
   display: block;
   margin: 6px 0 12px;
   float: left;
-  padding-right: 18px; /* needed to push the text more to the right */
+  padding-right: 32px; /* needed to push the text more to the right */
 }
 
 nav li {margin: 0 0 8px;}
