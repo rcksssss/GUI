@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Multiplication Table</h1>
+    
+    <form id ="tableForm">
+    <fieldset>
+      <legend>Enter Table Range</legend>
+      <label>Horizontal (Multiplier) Start:
+        <input type="number" id="hStart" required>
+      </label>
+      <label>Horizontal (Multiplier) End:
+        <input type="number" id="hEnd" required>
+      </label>
+      <label>Vertical (Multiplicand) Start:
+        <input type="number" id="vStart" required>
+      </label>
+      <label>Vertical (Multiplicand) End:
+        <input type="number" id="vEnd" required>
+      </label>
+      <button type="submit">Generate Table</button>
+    </fieldset>
+    </form>
+
+    <p id="errorMsg" class="error"></p>
+
+    <div id="tableContainer">
+        <!-- Multiplication table will be generated here -->
+    </div>
+</body>
+</html>
