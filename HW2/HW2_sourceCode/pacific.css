@@ -47,18 +47,23 @@ header{
   padding: 0 18px;
 }
 
+#content h2 {
+  font-size: 1.9em;
+  font-weight: bold; /* Added bold to h2 for better visibility */
+}
+
 /* Use marker.gif for bullets */
 /* marker.gif bullets with proper indent */
 #content ul {
   list-style-image: url("marker.gif");
   list-style-position: outside;  /* bullet outside, text lines up neatly */
   margin: 0 0 12px 36px;         /* increase left margin for indent */
-  padding-left: 40px;
 }
 
 #content li {
   margin: 6px 0;
-  line-height: 1.5;
+  line-height: 1.2;  
+  font-size: 1.1em; /* increased font size for readability */
 }
 
 
@@ -68,7 +73,7 @@ header{
   display: block;
   margin: 6px 0 12px;
   float: left;
-  padding-right: 18px; /* needed to push the text more to the right */
+  padding-right: 32px; /* needed to push the text more to the right */
 }
 
 nav li {margin: 0 0 8px;}
@@ -97,7 +102,7 @@ nav ul {
 	margin: 0;
 	padding: 0;
 	font-size: 1.2em;
-  line-height: 1; /* Added spacing vertically between words */
+  line-height: .8; /* Added spacing vertically between words */
 }
 
 .resort {
