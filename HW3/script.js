@@ -1,16 +1,13 @@
-/* ==============================================================
-   Author: Thomas Boyajian
-   Course: COMP 4610 - GUI Programming I
-   Assignment: HW3 - Interactive Dynamic Table
-   Description:
-     Reads user input for multiplier/multiplicand ranges,
-     validates data, and dynamically creates a formatted
-     multiplication table on the page. Handles invalid input
-     gracefully without popup alerts.
-   Sources:
-     - CSS Tricks nth-child recipes
-     - Professor Heines HW3 spec
-================================================================ */
+/*
+File: script.js
+Author: Thomas Boyajian
+Date: 10/13/25
+Description: 
+Contains all functionality for generating the multiplication table based on user input. 
+Validates input ranges, creates table elements dynamically, and ensures proper cleanup before rendering new results.
+Includes error handling for invalid entries and DOM updates for smooth user interaction.
+Comments throughout explain logic rather than restating code.
+*/
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("tableForm");
