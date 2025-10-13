@@ -20,7 +20,7 @@ fieldset {
   background-color: #fff;   
   padding: 15px 20px;
   border-radius: 8px;
-  border: 2px solid #333;
+  border: 3px solid #333;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
@@ -45,7 +45,7 @@ input[type="number"] {
   padding: 6px;
   margin-top: 3px;
   width: 180px;
-  border: 1px solid #aaa;
+  border: 2px solid #aaa;
   border-radius: 4px;
 }
 
@@ -53,26 +53,28 @@ button {
   display: block;
   margin: 10px auto 0 auto;
   padding: 8px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
+  background-color: #cacaa3;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border: 2px solid black;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+  border-color: black;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #cec59e;
 }
 
-/* USed for error message styling */
+/* Used for error message styling */
 .error {
   color: #cc0000;
   font-weight: bold;
   margin-top: 10px;
 }
 
-/* ---------- Table Container ---------- */
+/*  Table Container  */
 #tableContainer {
   max-width: 90vw;
   max-height: 70vh;
@@ -88,6 +90,7 @@ button:hover {
 table {
   border-collapse: collapse;
   margin: 0 auto;
+  width: 100%; 
 }
 
 th, td {
@@ -117,9 +120,11 @@ tbody th {
   z-index: 1;
 }
 
-/* ---------- Footer ---------- */
+/*  Footer */
 footer {
   margin-top: 25px;
   font-size: 0.9em;
-  color: #666;
+  color: #000000;
+  font-weight: bold;
+  text-shadow: #222222 1px 1px 2px;
 }
