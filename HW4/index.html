@@ -1,0 +1,113 @@
+<!--
+File: index.html
+Author: Thomas Boyajian
+Date: 10/13/25
+Description:
+Main structure for the multiplication table generator.
+Uses jQuery Validation plugin for input validation.
+All styling is external in style.css.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiplication Table</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Load jQuery (core library) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Load LOCAL validation plugin -->
+  <script src="js/jquery.validate.js"></script>
+
+  <!-- Load custom script last -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <h1>Multiplication Table</h1>
+
+  <!-- Disable browser’s built-in validation -->
+  <form id="tableForm" novalidate>
+    <fieldset>
+      <legend>Enter Table Range</legend>
+
+      <label>Horizontal (Multiplier) Start:
+        <input type="number" id="hStart" name="hStart" required />
+      </label>
+
+      <label>Horizontal (Multiplier) End:
+        <input type="number" id="hEnd" name="hEnd" required />
+      </label>
+
+      <label>Vertical (Multiplicand) Start:
+        <input type="number" id="vStart" name="vStart" required />
+      </label>
+
+      <label>Vertical (Multiplicand) End:
+        <input type="number" id="vEnd" name="vEnd" required />
+      </label>
+
+      <button type="submit">Generate Table</button>
+    </fieldset>
+  </form>
+
+  <p id="errorMsg" class="error"></p>
+  <div id="tableContainer"></div>
+
+  <footer>
+    <p>Created by Tommy Boyajian | © 2025</p>
+  </footer>
+
+  <!-- jQuery Validation configuration -->
+  <script>
+    $(document).ready(function () {
+      console.log("jQuery loaded:", typeof $ !== "undefined");
+      console.log("Validation plugin loaded:", typeof $.fn.validate !== "undefined");
+
+      $("#tableForm").validate({
+        rules: {
+          hStart: { required: true, number: true, min: -50, max: 50 },
+          hEnd:   { required: true, number: true, min: -50, max: 50 },
+          vStart: { required: true, number: true, min: -50, max: 50 },
+          vEnd:   { required: true, number: true, min: -50, max: 50 }
+        },
+        messages: {
+          hStart: {
+            required: "Please enter a starting horizontal value.",
+            number: "Please enter a valid number.",
+            min: "Value must be at least -50.",
+            max: "Value must be at most 50."
+          },
+          hEnd: {
+            required: "Please enter an ending horizontal value.",
+            number: "Please enter a valid number.",
+            min: "Value must be at least -50.",
+            max: "Value must be at most 50."
+          },
+          vStart: {
+            required: "Please enter a starting vertical value.",
+            number: "Please enter a valid number.",
+            min: "Value must be at least -50.",
+            max: "Value must be at most 50."
+          },
+          vEnd: {
+            required: "Please enter an ending vertical value.",
+            number: "Please enter a valid number.",
+            min: "Value must be at least -50.",
+            max: "Value must be at most 50."
+          }
+        },
+        errorPlacement: function (error, element) {
+          error.insertAfter(element);
+        },
+        submitHandler: function (form) {
+          generateTable(); // defined in script.js
+        }
+      });
+    });
+  </script>
+</body>
+</html>
