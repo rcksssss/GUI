@@ -1,0 +1,119 @@
+<!--
+File: index.html
+Author: Thomas Boyajian
+Date: 10/15/25
+Description:
+HW4 Part 2 – Dynamic Multiplication Table Generator
+Implements jQuery UI sliders and tabbed interface.
+Each table is generated dynamically, validated by jQuery Validation,
+and displayed within its own closable tab.
+All styling is handled externally in style.css.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HW4 Part 2 – Multiplication Table</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- jQuery core -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Local jQuery Validation -->
+  <script src="js/jquery.validate.js"></script>
+
+  <!-- Local jQuery UI (min.js + min.css in js/ folder) -->
+  <link rel="stylesheet" href="js/jquery-ui.min.css" />
+  <script src="js/jquery-ui.min.js"></script>
+
+  <!-- Custom logic -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <h1>Multiplication Table – Part 2</h1>
+
+  <!-- jQuery UI Tabs container -->
+  <div id="tabs">
+    <ul>
+      <li><a href="#input-tab">Input Form</a></li>
+    </ul>
+
+    <!-- Input Tab -->
+    <div id="input-tab">
+      <form id="tableForm" novalidate>
+        <fieldset>
+          <legend>Enter Table Range (using sliders)</legend>
+
+          <!-- Horizontal Start -->
+          <label for="hStart">Horizontal Start:</label>
+          <input type="number" id="hStart" name="hStart" required />
+          <div id="slider-hStart" class="slider"></div>
+
+          <!-- Horizontal End -->
+          <label for="hEnd">Horizontal End:</label>
+          <input type="number" id="hEnd" name="hEnd" required />
+          <div id="slider-hEnd" class="slider"></div>
+
+          <!-- Vertical Start -->
+          <label for="vStart">Vertical Start:</label>
+          <input type="number" id="vStart" name="vStart" required />
+          <div id="slider-vStart" class="slider"></div>
+
+          <!-- Vertical End -->
+          <label for="vEnd">Vertical End:</label>
+          <input type="number" id="vEnd" name="vEnd" required />
+          <div id="slider-vEnd" class="slider"></div>
+
+          <button type="submit">Generate Table</button>
+        </fieldset>
+      </form>
+
+      <button type="button" id="closeAllTabs">Close All Tabs</button>
+
+      <p id="errorMsg" class="error"></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Created by Tommy Boyajian | © 2025</p>
+  </footer>
+
+  <!-- jQuery Validation Setup -->
+  <script>
+    $(function () {
+      console.log("jQuery loaded:", typeof $ !== "undefined");
+      console.log("Validation plugin loaded:", typeof $.fn.validate !== "undefined");
+      console.log("jQuery UI loaded:", typeof $.ui !== "undefined");
+
+      // Initialize Tabs
+      $("#tabs").tabs();
+
+      // jQuery Validation rules
+      $("#tableForm").validate({
+        rules: {
+          hStart: { required: true, number: true, min: -50, max: 50 },
+          hEnd:   { required: true, number: true, min: -50, max: 50 },
+          vStart: { required: true, number: true, min: -50, max: 50 },
+          vEnd:   { required: true, number: true, min: -50, max: 50 }
+        },
+        messages: {
+          hStart: { required: "Please enter a starting horizontal value." },
+          hEnd:   { required: "Please enter an ending horizontal value." },
+          vStart: { required: "Please enter a starting vertical value." },
+          vEnd:   { required: "Please enter an ending vertical value." }
+        },
+        errorPlacement: function (error, element) {
+          error.insertAfter(element);
+        },
+        submitHandler: function (form) {
+          generateTable();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
