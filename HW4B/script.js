@@ -1,7 +1,7 @@
 /*
 File: script.js
 Author: Thomas Boyajian
-Date: 10/15/25
+Date: 10/23/25
 Description:
 HW4 Part 2 – Multiplication Table with jQuery UI sliders and tabs.
 Synchronizes input fields with sliders, validates user ranges,
@@ -16,7 +16,7 @@ $(document).ready(function () {
   const $errorMsg = $("#errorMsg");
   let tabCount = 1; // Counter for new tables
 
-  // Slider configuration
+  // Slider config
   const sliderConfig = {
     min: -50,
     max: 50,
@@ -43,9 +43,8 @@ $(document).ready(function () {
     }
   });
 
-  // -------------------------------
+
   // Generate Multiplication Table
-  // -------------------------------
   window.generateTable = function () {
     $errorMsg.text("");
 
@@ -100,9 +99,7 @@ $(document).ready(function () {
     addTableToTab($table, hStart, hEnd, vStart, vEnd);
   };
 
-  // -------------------------------
   // Add Generated Table to Tabs
-  // -------------------------------
   function addTableToTab($table, hStart, hEnd, vStart, vEnd) {
     const tabLabel = `H[${hStart}–${hEnd}] × V[${vStart}–${vEnd}]`;
     const tabId = "tab-" + tabCount++;
@@ -131,18 +128,14 @@ $(document).ready(function () {
     $tabs.tabs("option", "active", newIndex);
   }
 
-  // -------------------------------
   // Close Tabs (clicking the × icon)
-  // -------------------------------
   $tabs.on("click", "span.ui-icon-close", function () {
     const panelId = $(this).closest("li").remove().attr("aria-controls");
     $("#" + panelId).remove();
     $tabs.tabs("refresh");
   });
 
-  // -------------------------------
   // Close All Tabs Button
-  // -------------------------------
   $("#closeAllTabs").on("click", function () {
     $("#tabs .ui-tabs-nav li:gt(0)").remove(); // remove all except Input Form
     $("#tabs > div:gt(0)").remove(); // remove all tab panels except input
