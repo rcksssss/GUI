@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#rack-area {
+    position: relative;
+    width: 600px; /* matches rack image width */
+    margin: 0 auto; /* centers it */
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#rack-img {
+    width: 600px;
+}
+
+#rack-tiles {
+    position: absolute;
+    top: 22px;   /* adjust based on how high you want tiles to sit */
+    left: -65px;  /* horizontal padding */
+    width: 550px;
+    height: 70px;
+    z-index: 20;
+}
+
+.scrabble-tile {
+    width: 50px;
+    height: 50px;
+    cursor: grab;
+    position: absolute;
+    z-index: 50;
+}
+
+.board-square {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+#board-row {
+    margin-top: 30px;
+}
+
+.board-square {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    vertical-align: top;
+    background-size: cover;
+}
+
+.bonus-dl {
+    background-image: url("images/dl.png");
+}
+
+.bonus-dw {
+    background-image: url("images/dw.png");
+}
+
+.normal {
+    background-color: #f0e9d8;
+}
+
+.bonus-dl {
+    background-color: #9cd3ff;
+    color: black;
+    font-size: 10px;
+    text-align: center;
+    padding-top: 18px;
+}
+
+.bonus-dw {
+    background-color: #ff9c9c;
+    color: black;
+    font-size: 10px;
+    text-align: center;
+    padding-top: 18px;
+}
+
+.normal {
+    background-color: #f0e9d8;
+}
+
+#score-display {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+#submit-word {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#restart {
+    margin-top: 10px;
+    margin-left: 5px; /* space between buttons */
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+

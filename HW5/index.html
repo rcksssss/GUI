@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrabble HW5 - Thomas Boyajian</title>
+
+    <!-- jQuery + jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Scrabble - HW5</h1>
+
+    <!-- One Board Row (ONLY ONE!) -->
+    <div id="board-row"></div>
+
+    <!-- Tile Rack -->
+    <div id="rack-area">
+        <img id="rack-img" src="images/scrabble-tile-holder.png">
+        <div id="rack-tiles"></div>
+    </div>
+
+    <!-- Current Score -->
+    <div id="score-display">
+        Score: <span id="score">0</span>
+    </div>
+
+    <button id="submit-word">Submit Word</button>
+    <button id="restart">Restart Game</button>
+
+    <!-- Your JS -->
+    <script src="script.js"></script>
+</body>
+</html>
