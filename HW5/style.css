@@ -31,6 +31,7 @@ body {
     cursor: grab;
     position: absolute;
     z-index: 50;
+    object-fit: contain;
 }
 
 .board-square {
@@ -40,7 +41,8 @@ body {
 }
 
 #board-row {
-    margin-top: 30px;
+    width: fit-content;
+    margin: 20px auto;
 }
 
 .board-square {
@@ -48,41 +50,32 @@ body {
     height: 50px;
     border: 1px solid #ccc;
     display: inline-block;
-    vertical-align: top;
-    background-size: cover;
+    margin: 0;
+    padding: 0;
 }
 
-.bonus-dl {
-    background-image: url("images/dl.png");
-}
-
-.bonus-dw {
-    background-image: url("images/dw.png");
-}
-
-.normal {
-    background-color: #f0e9d8;
-}
 
 .bonus-dl {
     background-color: #9cd3ff;
     color: black;
-    font-size: 10px;
+    font-size: 12px;
     text-align: center;
-    padding-top: 18px;
+    padding-top: 13px;
+    padding-bottom: 0px;
+    font-weight: bold;
 }
-
 .bonus-dw {
     background-color: #ff9c9c;
     color: black;
-    font-size: 10px;
+    font-size: 12px;
     text-align: center;
-    padding-top: 18px;
+    padding-top: 13px;
+    font-weight: bold;
 }
-
 .normal {
     background-color: #f0e9d8;
 }
+
 
 #score-display {
     margin-top: 20px;
