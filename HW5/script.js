@@ -52,7 +52,10 @@ function buildBoardRow() {
 
                 // Validate contiguity rule
                 if (!isValidPlacement(index)) {
-                    ui.draggable.animate({ top: 10, left: 10 });
+                    // Bounce back to rack like original code
+                    ui.draggable.animate({ top: 10, left: 10 }, 300, function() {
+                        reflowRackTiles();
+                    });
                     return;
                 }
 
@@ -80,8 +83,13 @@ function dealTiles() {
 
     for (let i = 0; i < 7; i++) {
         let tile = getRandomTile();
-        currentHand.push(tile);
-        addTileToRack(tile.letter, i);
+        if (tile) {
+            currentHand.push(tile);
+            addTileToRack(tile.letter, i);
+        } else {
+            // No more tiles available
+            console.log("Tile supply depleted during initial deal");
+        }
     }
 }
 
@@ -96,6 +104,11 @@ function getRandomTile() {
         }
     });
 
+    // Check if tiles are depleted
+    if (available.length === 0) {
+        return null;
+    }
+
     let index = Math.floor(Math.random() * available.length);
     let chosenLetter = available[index];
 
@@ -103,6 +116,7 @@ function getRandomTile() {
     for (let t of tileData) {
         if (t.letter === chosenLetter) {
             t.amount--;
+            break;
         }
     }
 
@@ -131,15 +145,38 @@ function addTileToRack(letter, slot) {
 }
 
 
+// return a tile to the rack with animation
+function returnTileToRack(tile) {
+    tile.attr("data-onboard", "false");
+    
+    // Remove from board state
+    let letter = tile.attr("data-letter");
+    for (let i = 0; i < boardState.length; i++) {
+        if (boardState[i] === letter) {
+            boardState[i] = null;
+            break;
+        }
+    }
+    
+    // Animate back to rack
+    tile.animate({
+        top: "10px",
+        left: "10px"
+    }, 300, function() {
+        reflowRackTiles();
+    });
+}
+
+
 // rearrange tiles on rack after one is removed
 function reflowRackTiles() {
     let tiles = $("#rack-tiles .scrabble-tile");
 
     tiles.each(function (index) {
-        $(this).css({
+        $(this).animate({
             left: (index * 30) + "px",
             top: "10px"
-        });
+        }, 200);
     });
 }
 
@@ -162,6 +199,12 @@ function enableRackDrop() {
                 }
             }
 
+            // Position back in rack
+            ui.draggable.css({
+                top: "10px",
+                left: "10px"
+            });
+
             // Fix layout after return
             setTimeout(() => reflowRackTiles(), 50);
         }
@@ -169,17 +212,41 @@ function enableRackDrop() {
 }
 
 
-// check contiguous placement rule
+// check contiguous placement rule with NO GAPS
 function isValidPlacement(index) {
 
-    // Board is empty → valid
+    // Board is empty → valid (first tile)
     if (boardState.every(x => x === null)) return true;
 
-    // Must be next to an existing tile
-    if (index > 0 && boardState[index - 1] !== null) return true;
-    if (index < 14 && boardState[index + 1] !== null) return true;
+    // Must be adjacent to an existing tile
+    let hasAdjacent = false;
+    if (index > 0 && boardState[index - 1] !== null) hasAdjacent = true;
+    if (index < 14 && boardState[index + 1] !== null) hasAdjacent = true;
 
-    return false;
+    if (!hasAdjacent) return false;
+
+    // Check for gaps: all tiles must form a continuous sequence
+    // Simulate placing this tile
+    let tempBoard = [...boardState];
+    tempBoard[index] = "X"; // placeholder
+
+    // Find the range of tiles
+    let firstTile = -1, lastTile = -1;
+    for (let i = 0; i < 15; i++) {
+        if (tempBoard[i] !== null) {
+            if (firstTile === -1) firstTile = i;
+            lastTile = i;
+        }
+    }
+
+    // Check if there are any gaps between first and last tile
+    for (let i = firstTile; i <= lastTile; i++) {
+        if (tempBoard[i] === null) {
+            return false; // Gap found!
+        }
+    }
+
+    return true;
 }
 
 
@@ -204,18 +271,52 @@ function setupButtons() {
             return;
         }
 
+        // Validate no gaps in the word
+        let firstPos = Math.min(...positions);
+        let lastPos = Math.max(...positions);
+        for (let i = firstPos; i <= lastPos; i++) {
+            if (boardState[i] === null) {
+                alert("Your word cannot have gaps! All tiles must be adjacent.");
+                return;
+            }
+        }
+
         let wordScore = computeScore(positions, letters);
         totalScore += wordScore;
 
         $("#score").text(totalScore);
 
-        refillRack(letters);
+        // Clear board first (removes tiles)
         clearBoard();
+        
+        // Then refill rack
+        refillRack(letters.length);
+        
+        // Check if game should end due to tile depletion
+        checkGameEnd();
     });
 
     $("#restart").click(function () {
         restartGame();
     });
+}
+
+
+// check if game should end
+function checkGameEnd() {
+    let totalRemaining = 0;
+    tileData.forEach(t => {
+        totalRemaining += t.amount;
+    });
+    
+    let tilesInRack = $("#rack-tiles .scrabble-tile").length;
+    
+    // If no tiles remaining and rack isn't full, game is over
+    if (totalRemaining === 0 && tilesInRack < 7) {
+        setTimeout(() => {
+            alert("No more tiles remaining! Final Score: " + totalScore + "\n\nClick 'Restart Game' to play again.");
+        }, 500);
+    }
 }
 
 
@@ -252,18 +353,27 @@ function computeScore(indices, letters) {
 
 
 // refill rack after word submission (only for used letters)
-function refillRack(usedLetters) {
+function refillRack(numToRefill) {
 
-    let oldTiles = $("#rack-tiles .scrabble-tile").length;
-    let need = usedLetters.length;
+    // Count how many tiles are currently in the rack
+    let currentTiles = $("#rack-tiles .scrabble-tile").length;
+    let need = Math.min(numToRefill, 7 - currentTiles);
 
+    let added = 0;
     for (let i = 0; i < need; i++) {
         let tile = getRandomTile();
-        addTileToRack(tile.letter, oldTiles + i);
+        if (tile) {
+            addTileToRack(tile.letter, currentTiles + added);
+            added++;
+        } else {
+            // No more tiles available
+            console.log("Cannot refill - tile supply depleted");
+            break;
+        }
     }
 
     // Fix spacing after adding tiles
-    reflowRackTiles();
+    setTimeout(() => reflowRackTiles(), 100);
 }
 
 
