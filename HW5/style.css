@@ -1,3 +1,14 @@
+/*
+ File: style.css
+ Student: Thomas Boyajian
+ Email: thomas_boyajian@student.uml.edu
+ Course: COMP 4610 GUI Programming I
+ Date: 12/5/2025
+ 
+ Description: Styling for Scrabble game interface.
+ Includes board squares, bonus colors, tile rack positioning, and buttons.
+*/
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
