@@ -2,6 +2,7 @@ let tileData = [];              // Loaded from JSON
 let currentHand = [];           // Player's tiles
 let boardState = Array(15).fill(null);  // Tracks letters placed on board
 let totalScore = 0;
+let startPos = {};              // Store starting position of dragged tile
 
 $(document).ready(function () {
 
@@ -44,20 +45,46 @@ function buildBoardRow() {
 
         // Drop handler
         square.droppable({
-            accept: ".scrabble-tile",
+            accept: function(draggable) {
+                // Check if this square can accept the tile BEFORE allowing drop
+                let index = parseInt($(this).attr("data-index"));
+                
+                // If board is empty, only accept first square (index 0)
+                if (boardState.every(x => x === null)) {
+                    return index === 0;
+                }
+                
+                // Otherwise, tile must be adjacent to existing tiles
+                let hasAdjacent = false;
+                if (index > 0 && boardState[index - 1] !== null) hasAdjacent = true;
+                if (index < 14 && boardState[index + 1] !== null) hasAdjacent = true;
+                
+                // Also check for gaps
+                if (hasAdjacent) {
+                    let tempBoard = [...boardState];
+                    tempBoard[index] = "X";
+                    
+                    let firstTile = -1, lastTile = -1;
+                    for (let i = 0; i < 15; i++) {
+                        if (tempBoard[i] !== null) {
+                            if (firstTile === -1) firstTile = i;
+                            lastTile = i;
+                        }
+                    }
+                    
+                    // Check for gaps
+                    for (let i = firstTile; i <= lastTile; i++) {
+                        if (tempBoard[i] === null) {
+                            return false; // Gap found, reject
+                        }
+                    }
+                }
+                
+                return hasAdjacent;
+            },
             drop: function (event, ui) {
-
                 let index = parseInt($(this).attr("data-index"));
                 let letter = ui.draggable.attr("data-letter");
-
-                // Validate contiguity rule
-                if (!isValidPlacement(index)) {
-                    // Bounce back to rack like original code
-                    ui.draggable.animate({ top: 10, left: 10 }, 300, function() {
-                        reflowRackTiles();
-                    });
-                    return;
-                }
 
                 // Snap tile onto the square
                 ui.draggable.position({
@@ -138,7 +165,15 @@ function addTileToRack(letter, slot) {
         })
         .draggable({
             revert: "invalid",
-            containment: "document"
+            containment: "document",
+            start: function(ev, ui) {
+                // Save original position (used for bounce back)
+                startPos = ui.helper.position();
+            },
+            stop: function() {
+                // Reset revert option back to invalid for next drag
+                $(this).draggable('option', 'revert', 'invalid');
+            }
         });
 
     $("#rack-tiles").append(img);
